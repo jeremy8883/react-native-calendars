@@ -18,7 +18,8 @@ class CalendarHeader extends Component {
     hideDayNames: PropTypes.bool,
     weekNumbers: PropTypes.bool,
     onPressArrowLeft: PropTypes.func,
-    onPressArrowRight: PropTypes.func
+    onPressArrowRight: PropTypes.func,
+    hideMonthSelection: PropTypes.bool,
   };
 
   constructor(props) {
@@ -105,16 +106,18 @@ class CalendarHeader extends Component {
     }
     return (
       <View>
-        <View style={this.style.header}>
-          {leftArrow}
-          <View style={{ flexDirection: 'row' }}>
-            <Text allowFontScaling={false} style={this.style.monthText}>
-              {this.props.month.toString(this.props.monthFormat ? this.props.monthFormat : 'MMMM yyyy')}
-            </Text>
-            {indicator}
+        {!this.props.hideMonthSelection &&
+          <View style={this.style.header}>
+            {leftArrow}
+            <View style={{ flexDirection: 'row' }}>
+              <Text allowFontScaling={false} style={this.style.monthText}>
+                {this.props.month.toString(this.props.monthFormat ? this.props.monthFormat : 'MMMM yyyy')}
+              </Text>
+              {indicator}
+            </View>
+            {rightArrow}
           </View>
-          {rightArrow}
-        </View>
+        }
         {
           !this.props.hideDayNames &&
           <View style={this.style.week}>
